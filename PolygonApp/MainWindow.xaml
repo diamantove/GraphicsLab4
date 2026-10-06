@@ -1,0 +1,63 @@
+<Window x:Class="PolygonApp.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Полигоны и вычислительная геометрия" Width="1280" Height="800" MinWidth="1050" MinHeight="650">
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="340"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="Полигоны" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <WrapPanel Margin="0,0,0,10">
+                    <Button Content="Создать полигон" Click="CreatePolygon_Click" Margin="0,0,6,6"/>
+                    <Button Content="Завершить" Click="FinishPolygon_Click" Margin="0,0,6,6"/>
+                    <Button Content="Очистить сцену" Click="ClearScene_Click" Margin="0,0,6,6"/>
+                </WrapPanel>
+                <TextBlock Text="Выбор" FontWeight="Bold"/>
+                <TextBlock Text="Выберите объект кликом по точке, ребру или внутренней области." TextWrapping="Wrap" Margin="0,3,0,5"/>
+                <Button Content="Выбор объекта" Click="SelectObject_Click" HorizontalAlignment="Left" Margin="0,0,0,12"/>
+                <TextBlock Text="Преобразования выбранного объекта" FontWeight="Bold"/>
+                <Grid Margin="0,5,0,2">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="80"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="80"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                    <TextBlock Text="dx" VerticalAlignment="Center"/><TextBox x:Name="DxBox" Grid.Column="1" Text="40" Margin="4,0,8,0"/>
+                    <TextBlock Grid.Column="2" Text="dy" VerticalAlignment="Center"/><TextBox x:Name="DyBox" Grid.Column="3" Text="20" Margin="4,0,8,0"/>
+                    <Button Grid.Column="4" Content="Сместить" Click="Translate_Click"/>
+                </Grid>
+                <Grid Margin="0,4,0,2">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="65"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="65"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="65"/></Grid.ColumnDefinitions>
+                    <TextBlock Text="Угол" VerticalAlignment="Center"/><TextBox x:Name="AngleBox" Grid.Column="1" Text="30" Margin="4,0,7,0"/>
+                    <TextBlock Grid.Column="2" Text="Cx" VerticalAlignment="Center"/><TextBox x:Name="CenterXBox" Grid.Column="3" Text="300" Margin="4,0,7,0"/>
+                    <TextBlock Grid.Column="4" Text="Cy" VerticalAlignment="Center"/><TextBox x:Name="CenterYBox" Grid.Column="5" Text="250" Margin="4,0,0,0"/>
+                </Grid>
+                <WrapPanel Margin="0,3,0,5">
+                    <Button Content="Поворот вокруг точки" Click="RotatePoint_Click" Margin="0,0,6,5"/>
+                    <Button Content="Поворот вокруг центра" Click="RotateCenter_Click" Margin="0,0,6,5"/>
+                </WrapPanel>
+                <Grid Margin="0,1,0,3">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="65"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="65"/></Grid.ColumnDefinitions>
+                    <TextBlock Text="Sx" VerticalAlignment="Center"/><TextBox x:Name="ScaleXBox" Grid.Column="1" Text="1.2" Margin="4,0,7,0"/>
+                    <TextBlock Grid.Column="2" Text="Sy" VerticalAlignment="Center"/><TextBox x:Name="ScaleYBox" Grid.Column="3" Text="1.2" Margin="4,0,0,0"/>
+                </Grid>
+                <WrapPanel Margin="0,0,0,12">
+                    <Button Content="Масштаб от точки C" Click="ScalePoint_Click" Margin="0,0,6,5"/>
+                    <Button Content="Масштаб от центра" Click="ScaleCenter_Click" Margin="0,0,6,5"/>
+                </WrapPanel>
+                <TextBlock Text="Геометрические инструменты" FontWeight="Bold"/>
+                <TextBlock Text="Для проверок точки сначала выберите полигон в режиме «Выбор». Инструменты остаются активны после каждого клика." TextWrapping="Wrap" Margin="0,3,0,5"/>
+                <WrapPanel>
+                    <Button Content="Пересечение ребер" Click="EdgeIntersection_Click" Margin="0,0,6,5"/>
+                    <Button Content="Точка в выпуклом" Click="ConvexPoint_Click" Margin="0,0,6,5"/>
+                    <Button Content="Точка в невыпуклом" Click="PolygonPoint_Click" Margin="0,0,6,5"/>
+                    <Button Content="Слева / справа" Click="PointSide_Click" Margin="0,0,6,5"/>
+                </WrapPanel>
+                <Border BorderBrush="#B8C2CC" BorderThickness="1" Padding="8" Margin="0,8,0,0" Background="#F7F9FB">
+                    <StackPanel>
+                        <TextBlock Text="Текущий режим" FontWeight="Bold"/>
+                        <TextBlock x:Name="ModeText" Text="Нет" TextWrapping="Wrap"/>
+                        <TextBlock Text="Статус" FontWeight="Bold" Margin="0,7,0,0"/>
+                        <TextBlock x:Name="StatusText" Text="Выберите инструмент или создайте полигон." TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        <Border Grid.Column="2" BorderBrush="#8898A8" BorderThickness="1" Background="White">
+            <Canvas x:Name="SceneCanvas" Background="#FCFDFE" MouseLeftButtonDown="SceneCanvas_MouseLeftButtonDown"/>
+        </Border>
+    </Grid>
+</Window>
